@@ -70,30 +70,49 @@ The input is an array of strings representing historical customer data
 
 
 ## Interface
+
 Implement the following method: 
+
 ``` def solution(A, Y, Z)```
+
 Given:
-- an array of strings that represent customers (denoted by `A` in the method) representing arrival data for `numCustomers` customers
-- an integer `numWindows` (denoted by `Y`) representing the number of windows for serving customers 
-- an integer `queueSize` (denoted by `Z`) representing the size of the DMV queue
-Return:
-- an array of integers of size `numWindows+1` where the 0-th index represents the total number of customers served by the DMV and indexes `1` to `numWindows` represent the number of customers served at each window
-<br>
+    - an array of strings that represent customers (denoted by `A` in the method) 
+        representing arrival data for `numCustomers` customers
+    - an integer `numWindows` (denoted by `Y`) representing the number of 
+        windows for serving customers 
+    - an integer `queueSize` (denoted by `Z`) representing the size of the DMV 
+        queue
+
+    Return:
+    - an array of integers of size `numWindows+1` where the 0-th index represents 
+        the total number of customers served by the DMV and indexes `1` to `numWindows` 
+        represent the number of customers served at each window
+    <br>
+
+
 ## Clarifications and Assumptions
-- There is only one queue. Not one per window.
-- Customer arrival data is sortedby arrival timestamp
-- Multiple customers can arrive at the same timestamp. They should be served in the order given in the input data
-- If there are multiple available windows to serve a customer, the window with the lowest index must be chosen (Eg, If 2,5,7 are available, 2 must be chosen to serve the customer)
-- Queue is first in first out. But the customer can drop out from the middle in case of timeout. In such cases, the next customer would move forward in the queue and one spot becomes available in the queue.
-- If a customer arrives at a timestamp when the queue is full but a window becomes avaialble exactly at that time, you should not send the customer home. During a timestamp `tick`, move any eligible customers off the queue before attemping to add new arrivals.
-- All the windows must be included in the output, even if some of them has not served any clients
-- `numCustomers` is an integer within the range [0, 2^31 - 1]
-- `numWindows` is an integer within the range [0, 2^31 -1]
-- `customers` is a zero-indexed array of strings, sorted ascending by timestamp
-- `queueSize` is an integer within the range [0, 2^31 -1]
-- Each arrival time is an integer in the range [0, 2^31 -1]. Overflows are possible when calculating future timestamps from the arrival timestamp.
-- `serviceTime` and `toleranceTime` are integers in the range [1, 2^31 -1]
-<br>
+    - There is only one queue. Not one per window.
+    - Customer arrival data is sortedby arrival timestamp
+    - Multiple customers can arrive at the same timestamp. 
+        They should be served in the order given in the input data
+    - If there are multiple available windows to serve a customer, 
+        the window with the lowest index must be chosen (Eg, If 2,5,7 
+        are available, 2 must be chosen to serve the customer)
+    - Queue is first in first out. But the customer can drop out from 
+        the middle in case of timeout. In such cases, the next customer 
+        would move forward in the queue and one spot becomes available in the queue.
+    - If a customer arrives at a timestamp when the queue is full but a 
+        window becomes avaialble exactly at that time, you should not send the customer home. 
+        During a timestamp `tick`, move any eligible customers off the queue before attemping to add new arrivals.
+    - All the windows must be included in the output, even if some of them has not served any clients
+    - `numCustomers` is an integer within the range [0, 2^31 - 1]
+    - `numWindows` is an integer within the range [0, 2^31 -1]
+    - `customers` is a zero-indexed array of strings, sorted ascending by timestamp
+    - `queueSize` is an integer within the range [0, 2^31 -1]
+    - Each arrival time is an integer in the range [0, 2^31 -1]. Overflows are 
+        possible when calculating future timestamps from the arrival timestamp.
+    - `serviceTime` and `toleranceTime` are integers in the range [1, 2^31 -1]
+    <br>
 ### Hints/ Things to consider
 - Work incrementally! Get the simpler example cases working perfectly first, then tackle the more complex ones
 - For scoring, it is more important to have the basic funcitonality working than to try to get it all at once.

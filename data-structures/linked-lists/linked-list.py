@@ -34,11 +34,26 @@ class SinglyLinkedList:
             self.size -= 1
             return oldHead
 
+    def reverseLinkedList(self):
+        previous_node = None
+        next_node = self.head.next
+
+        while self.head.next is not None:
+            self.head.next = previous_node # changes pointer
+            previous_node = self.head
+            self.head = next_node
+            next_node = self.head.next
+        
+        self.head.next = previous_node
+
+
+
 newLinkedList = SinglyLinkedList()
-print(newLinkedList)
 newLinkedList.insert(4)
 newLinkedList.insert(5)
 newLinkedList.insert(6)
 print(newLinkedList)
-newLinkedList.removeHead()
+# print(newLinkedList)
+newLinkedList.reverseLinkedList()
+# newLinkedList.removeHead()
 print(newLinkedList)

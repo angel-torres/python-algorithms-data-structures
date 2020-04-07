@@ -6,7 +6,7 @@ class Node:
         self.next = None
 
     def __str__(self):
-        return f'value - {self.value}, next - {self.next}'
+        return f'{self.value}|  ->  |{self.next}|'
 
 class SinglyLinkedList:
     def __init__(self):
@@ -14,7 +14,7 @@ class SinglyLinkedList:
         self.size = 0
 
     def __str__(self):
-        return f'head - {self.head}, size - {self.size}'
+        return f'LinkedList - {self.head} ------- size - {self.size}'
 
     def insert(self, value):
         newNode = Node(value)
@@ -54,6 +54,25 @@ class SinglyLinkedList:
         
         return False
 
+    def findAndRemove(self, value):
+        previous_node = None
+        original_head = self.head
+
+        while self.head is not None:
+            if self.head.value == value:
+                if previous_node is None:
+                    self.removeHead()
+                    return True
+                else:
+                    previous_node.next = self.head.next
+                    self.head = original_head
+                self.size -= 1
+                return True
+            previous_node = self.head
+            self.head = self.head.next
+        
+        return False
+
 
 newLinkedList = SinglyLinkedList()
 newLinkedList.insert(1)
@@ -65,6 +84,9 @@ newLinkedList.insert(6)
 # print(newLinkedList)
 newLinkedList.reverseLinkedList()
 # newLinkedList.removeHead()
-print(newLinkedList.find(6))
-print(newLinkedList.find(0))
+# print(newLinkedList.find(6))
+# print(newLinkedList.find(0))
+print(newLinkedList.findAndRemove(2))
+print(newLinkedList.findAndRemove(3))
+print(newLinkedList.findAndRemove(1))
 print(newLinkedList)

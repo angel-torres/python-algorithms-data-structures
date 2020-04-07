@@ -45,15 +45,26 @@ class SinglyLinkedList:
             next_node = self.head.next
         
         self.head.next = previous_node
-
+    
+    def find(self, value):
+        while self.head is not None:
+            if self.head.value == value:
+                return self.head
+            self.head = self.head.next
+        
+        return False
 
 
 newLinkedList = SinglyLinkedList()
+newLinkedList.insert(1)
+newLinkedList.insert(2)
+newLinkedList.insert(3)
 newLinkedList.insert(4)
 newLinkedList.insert(5)
 newLinkedList.insert(6)
-print(newLinkedList)
 # print(newLinkedList)
 newLinkedList.reverseLinkedList()
 # newLinkedList.removeHead()
+print(newLinkedList.find(6))
+print(newLinkedList.find(0))
 print(newLinkedList)

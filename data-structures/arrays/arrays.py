@@ -20,8 +20,7 @@ class Array:
     
     def append(self, item):
         if self.size == self.capacity:
-            print("Array is full!")
-            return
+            self.resize()
 
         self.storage[self.size] = item
         self.size += 1
@@ -37,11 +36,16 @@ class Array:
             if self.storage[i] == item:
                 for i in range(i, self.size - 1, 1):
                     self.storage[i] = self.storage[i + 1]
-                    print(self.storage[i])
                 self.storage[self.size - 1] = None
                 self.size -= 1
+    
+    def resize(self):
+        self.capacity = self.capacity * 2
+        new_storage = [None] * self.capacity
+        for i in range(self.size):
+            new_storage[i] = self.storage[i]
 
-
+        self.storage = new_storage
 
 newArray = Array(8)
 print(newArray)
@@ -53,10 +57,8 @@ newArray.insert(7)
 newArray.insert(8)
 newArray.append(2)
 newArray.append(1)
-newArray.remove(6)
-newArray.remove(7)
-newArray.remove(5)
-newArray.append(1)
+print(newArray)
+newArray.append(9)
 # print(newArray.pop())
 # print(newArray.pop())
 # print(newArray.pop())

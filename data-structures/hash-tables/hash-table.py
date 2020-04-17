@@ -25,20 +25,47 @@ class HashTable:
     def insert(self, key, value):
         index = self._hash_mod(key)
         newNode = ListNode(key, value)
-        print(index)
         if self.storage[index] is None:
             self.storage[index] = newNode
         else:
             currHead = self.storage[index]    
-            while currHead is not None:
+            prevNode = None
+            while currHead is not None and currHead.key != key:
+                prevNode = currHead
                 currHead = currHead.next
-            currHead.next = newNode
+
+            if currHead is None:
+                prevNode.next = newNode
+            else:
+                currHead = newNode
+    
+    def find(self, key):
+        index = self._hash_mod(key)
+
+        currHead = self.storage[index]
+
+        while currHead is not None and currHead.key != key:
+            currHead = currHead.next
+        
+        if currHead is None:
+            return None
+
+        return currHead.key
+
+
     
     def get_storage(self):
         for item in self.storage:
             print(item)
 
-newHashTable = HashTable(8)
+newHashTable = HashTable(2)
 newHashTable.insert("apple", "red")
 newHashTable.insert("pear", "green")
+newHashTable.insert("kiwi", "green")
+newHashTable.insert("mango", "orange")
+newHashTable.insert("orange", "orange")
+newHashTable.insert("banana", "yellow")
+print(newHashTable.find("banana"))
+print(newHashTable.find("orange"))
+print(newHashTable.find("papaya"))
 newHashTable.get_storage()

@@ -1,4 +1,5 @@
 from queue import Queue
+from stack import Stack
 
 class Graph:
     def __init__(self):
@@ -23,16 +24,36 @@ class Graph:
 
         while plan_to_visit.size > 0:
             current_vertex = plan_to_visit.dequeue()
-            path.append(current_vertex)
+            print(current_vertex)
             if current_vertex not in visited:
                 visited.add(current_vertex)
+                neighbors = self.get_neighbors(current_vertex)
 
-            neighbors = self.get_neighbors(current_vertex)
-            for neighbor in neighbors:
-                if neighbor not in visited:
-                    plan_to_visit.queue(neighbor)
+                for neighbor in neighbors:
+                    if neighbor not in visited:
+                        plan_to_visit.queue(neighbor)
         
         return path
+    
+    def dft(self, vertex):
+        plan_to_visit = Stack()
+        visited = set()
+
+        plan_to_visit.push(vertex)
+
+        while plan_to_visit.size > 0:
+            current_vertex = plan_to_visit.pop()
+
+            if current_vertex not in visited:
+                print(current_vertex)
+                visited.add(current_vertex)
+
+                neighbors = self.get_neighbors(current_vertex)
+
+                for neighbor in neighbors:
+                    plan_to_visit.push(neighbor)
+
+
 
 
 if __name__ == '__main__':
@@ -86,7 +107,7 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    print(graph.dft(1))
+    graph.dft(1)
     # graph.dft_recursive(1)
 
     '''

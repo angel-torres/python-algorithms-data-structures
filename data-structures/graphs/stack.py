@@ -11,6 +11,6 @@ class Stack:
         self.size -= 1
         return self.storage.pop()
 
-new_stack = Stack()
-new_stack.push(1)
-new_stack.push(2)
+# new_stack = Stack()
+# new_stack.push(1)
+# new_stack.push(2)

@@ -24,7 +24,6 @@ class Graph:
 
         while plan_to_visit.size > 0:
             current_vertex = plan_to_visit.dequeue()
-            print(current_vertex)
             if current_vertex not in visited:
                 visited.add(current_vertex)
                 neighbors = self.get_neighbors(current_vertex)
@@ -52,6 +51,32 @@ class Graph:
 
                 for neighbor in neighbors:
                     plan_to_visit.push(neighbor)
+        
+    def bfs(self, v1, v2):
+        plan_to_visit = Queue() 
+        visited = set()
+
+        plan_to_visit.queue([v1]) 
+
+        while plan_to_visit.size > 0:
+            current_path = plan_to_visit.dequeue()
+            current_vertex = current_path[-1]
+
+            if current_vertex == v2:
+                print(current_path)
+                return current_path
+
+            if current_vertex not in visited:
+                visited.add(current_vertex)
+                neighbors = self.get_neighbors(current_vertex)
+
+                for neighbor in neighbors:
+                    new_list = list(current_path)
+                    new_list.append(neighbor)
+                    plan_to_visit.queue(new_list)
+
+    def dfs(self, v1, v2):
+        pass
 
 
 
@@ -107,14 +132,14 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    graph.dft(1)
+    # graph.dft(1)
     # graph.dft_recursive(1)
 
     '''
     Valid BFS path:
         [1, 2, 4, 6]
     '''
-    # print(graph.bfs(1, 6))
+    graph.bfs(1, 6)
 
     '''
     Valid DFS paths:
